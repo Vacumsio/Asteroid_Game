@@ -17,6 +17,7 @@ namespace Lesson_1
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
+
         static Game()
         {
         }
