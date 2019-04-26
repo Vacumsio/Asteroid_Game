@@ -52,7 +52,8 @@ namespace Lesson_1
         {
             _objs = new BaseObject[30];
             for (int i = 0; i < _objs.Length; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
+                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(20, 20));
+
         }
 
         public static void Draw()
