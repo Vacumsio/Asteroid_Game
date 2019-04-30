@@ -13,7 +13,7 @@ namespace Lesson_1
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
         public static BaseObject[] _objs;
-        // Свойства
+        
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
@@ -37,7 +37,7 @@ namespace Lesson_1
 
             // Графическое устройство для вывода графики            
             Graphics g;
-            // Предоставляет доступ к главному буферу графического контекста для текущего приложения
+            // Предоставляет доступ к главному буферу графического контекста для текущего приложения           
             _context = BufferedGraphicsManager.Current;
             g = form.CreateGraphics();
             // Создаем объект (поверхность рисования) и связываем его с формой
