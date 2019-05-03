@@ -52,21 +52,22 @@ namespace Lesson_1
         {
             _objs = new BaseObject[30];
             for (int i = 0; i < _objs.Length / 2; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(10, 10));
+                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(20, 20));
             for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(5, 5));
+                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(10, 10));
+
         }
 
 
         public static void Draw()
         {
             // Проверяем вывод графики
-            Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
+            Buffer.Graphics.Clear(Color.Wheat);
+            Buffer.Graphics.DrawRectangle(Pens.Wheat, new Rectangle(100, 100, 200, 200));
             Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
             Buffer.Render();
 
-            Buffer.Graphics.Clear(Color.Black);
+            Buffer.Graphics.Clear(Color.SeaGreen);
             foreach (BaseObject obj in _objs)
                 obj.Draw();
             Buffer.Render();
