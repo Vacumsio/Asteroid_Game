@@ -21,8 +21,11 @@ namespace Lesson_1
 
         public override void Update()
         {
+
             Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
+            Pos.Y = Pos.Y - Dir.Y;
+            if (Pos.X < 0 || Pos.X > Game.Width) Dir.X = -Dir.X;
+            if (Pos.Y < 0 || Pos.Y > Game.Height) Dir.Y = -Dir.Y;
         }
 
     }

@@ -52,9 +52,9 @@ namespace Lesson_1
         {
             _objs = new BaseObject[30];
             for (int i = 0; i < _objs.Length / 2; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(20, 20));
+                _objs[i] = new BaseObject(new Point(300, i * 20), new Point(-i, -i), new Size(10, 10));
             for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(10, 10));
+                _objs[i] = new Star(new Point(300, i * 20), new Point(-i*2, -i/2), new Size(5, 5));
 
         }
 
