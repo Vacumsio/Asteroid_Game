@@ -24,8 +24,6 @@ namespace MyGame
             
         }
 
-
-
         /// <summary>
         /// Абстактный метод для рисования объекта
         /// </summary>

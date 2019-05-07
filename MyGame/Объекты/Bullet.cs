@@ -10,6 +10,7 @@ namespace MyGame
     class Bullet : BaseObject, IMoveStartPosition
     {
         Random rnd = new Random();
+
         /// <summary>
         /// Конструктор класса наследованный  от  BaseObject
         /// </summary>
@@ -21,6 +22,7 @@ namespace MyGame
             if (Size.Width < 5 || Size.Height < 1 || Size.Height > 4 || Size.Width > 10) throw new GameObjectException("Неправильные размеры Пули");
             if (Dir.X < 5 || Dir.X > 10) throw new GameObjectException("Неправильная скорость Пули");
         }
+
         /// <summary>
         /// НАследованый метод. Рисует объект
         /// </summary
@@ -43,6 +45,7 @@ namespace MyGame
                Pos.Y = rnd.Next(Size.Height, Game.Height);
             }
         }
+
         public void MoveStartPosition()
         {
             Pos.X = Game.Width + Size.Width;

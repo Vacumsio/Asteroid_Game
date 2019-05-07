@@ -7,10 +7,12 @@ namespace MyGame
     class Asteroid:BaseObject, IMoveStartPosition
     {
         Random rnd = new Random();
+
         /// <summary>
         /// Свойство описывающие жизни
         /// </summary>
         public int Power { get; set; }
+
         /// <summary>
         /// Конструктор класса наследованный  от  BaseObject
         /// </summary>
@@ -23,6 +25,7 @@ namespace MyGame
             if (Size.Width < 10 || Size.Height < 10 || Size.Height > 30 || Size.Width > 30) throw new GameObjectException("Неправильные размеры Астеройда");
             if (Dir.X < 1 || Dir.X > 15) throw new GameObjectException("Неправильная скорость Астеройда");
         }
+
         /// <summary>
         /// Наследованый метод. Рисует объект
         /// </summary>
@@ -30,6 +33,7 @@ namespace MyGame
         {
             Game.Buffer.Graphics.FillEllipse(Brushes.White, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
         }
+
         /// <summary>
         /// Наследованый метод. Логика движения объекта
         /// </summary>

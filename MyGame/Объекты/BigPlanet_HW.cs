@@ -13,11 +13,13 @@ namespace MyGame
             if (Size.Width < 20 || Size.Height < 20 || Size.Height > 100 || Size.Width > 100) throw new GameObjectException("Неправильные размеры Астеройда");
             if (Dir.X < 5 || Dir.X > 50) throw new GameObjectException("Неправильная скорость Астеройда");
         }
+
         public override void Draw()
         {
             Game.Buffer.Graphics.FillEllipse(Brushes.Blue, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
             
         }
+
         public override void Update()
         {
             

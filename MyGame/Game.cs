@@ -15,10 +15,12 @@ namespace MyGame
         {
 
         }
+
         /// <summary>
         /// Основной метод вывода графики
         /// </summary>
         /// <param name="form"></param>
+        /// 
         public static void Init(Form form)
         {
             Graphics g;
@@ -33,6 +35,7 @@ namespace MyGame
             timer.Start();
             timer.Tick += Timer_Tick;
         }
+
         /// <summary>
         /// Метод Отрисовки объектов в форме
         /// </summary>
@@ -53,6 +56,7 @@ namespace MyGame
             _bullet.Draw();
             Buffer.Render();
         }
+
         /// <summary>
         /// Описывает движение объектов на экране
         /// </summary>
