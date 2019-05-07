@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-//Резяпкин владимир
 
 namespace MyGame
 {
