@@ -13,7 +13,7 @@ namespace Lesson_1
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
         public static BaseObject[] _objs;
-        
+        // Свойства
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
@@ -37,7 +37,7 @@ namespace Lesson_1
 
             // Графическое устройство для вывода графики            
             Graphics g;
-            // Предоставляет доступ к главному буферу графического контекста для текущего приложения           
+            // Предоставляет доступ к главному буферу графического контекста для текущего приложения
             _context = BufferedGraphicsManager.Current;
             g = form.CreateGraphics();
             // Создаем объект (поверхность рисования) и связываем его с формой
@@ -51,18 +51,20 @@ namespace Lesson_1
         public static void Load()
         {
             _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length / 2; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(10, 10));
-            for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(5, 5));
+            for (int i = 0; i < _objs.Length / 3; i++)
+                _objs[i] = new BaseObject(new Point(100, i * 20), new Point(-i, -i), new Size(3, 3));
+            //for (int i = 10; i < 20; i++)
+            //    _objs[i] = new BaseObject(new Point(100, i * 20), new Point(-i, -i), new Size(2, 1));
+            for (int i = 20; i < _objs.Length; i++)
+                _objs[i] = new Star(new Point(300, i * 20), new Point(-i, -i), new Size(3, 3));
         }
 
 
         public static void Draw()
         {
             // Проверяем вывод графики
-            Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
+            Buffer.Graphics.Clear(Color.Wheat);
+            Buffer.Graphics.DrawRectangle(Pens.Wheat, new Rectangle(100, 100, 200, 200));
             Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
             Buffer.Render();
 
