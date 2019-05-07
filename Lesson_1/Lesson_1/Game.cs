@@ -51,10 +51,12 @@ namespace Lesson_1
         public static void Load()
         {
             _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length / 2; i++)
-                _objs[i] = new BaseObject(new Point(100, i * 20), new Point(-i, -i), new Size(10, 10));
-            for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(300, i * 20), new Point(-i*2, -i/2), new Size(5, 5));
+            for (int i = 0; i < _objs.Length / 3; i++)
+                _objs[i] = new BaseObject(new Point(100, i * 20), new Point(-i, -i), new Size(3, 3));
+            for (int i = 10; i < 20; i++)
+                _objs[i] = new BaseObject(new Point(100, i * 20), new Point(-i, -i), new Size(2, 1));
+            for (int i = 20; i < _objs.Length; i++)
+                _objs[i] = new Star(new Point(300, i * 20), new Point(-i, -i), new Size(3, 3));
         }
 
 
@@ -66,7 +68,7 @@ namespace Lesson_1
             Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
             Buffer.Render();
 
-            Buffer.Graphics.Clear(Color.SeaGreen);
+            Buffer.Graphics.Clear(Color.Black);
             foreach (BaseObject obj in _objs)
                 obj.Draw();
             Buffer.Render();

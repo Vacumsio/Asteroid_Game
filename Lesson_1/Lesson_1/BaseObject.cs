@@ -23,8 +23,8 @@ namespace Lesson_1
         public virtual void Draw()
         {
 
-            Game.Buffer.Graphics.DrawEllipse(Pens.Black, Pos.X, Pos.Y, Size.Width, Size.Height);
-            Game.Buffer.Graphics.FillEllipse(Brushes.Gray, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.FillEllipse(Brushes.White, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
 
         public virtual void Update()
