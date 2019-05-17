@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 namespace Asteroids
 {
     /// <summary>
+    /// Делегат
+    /// </summary>
+    public delegate void Message();
+    /// <summary>
     /// Базовый абстрактный класс для всех графических елементов
     /// </summary>
     abstract class BaseObject : ICollision

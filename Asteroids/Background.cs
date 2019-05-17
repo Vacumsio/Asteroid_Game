@@ -14,6 +14,7 @@ namespace Asteroids
         {
 
         }
+
         public override void Draw()
         {
             Game.buffer.Graphics.DrawImage(newImage, new Rectangle(Pos, new Size(Size.Width, Size.Height)));
@@ -21,7 +22,8 @@ namespace Asteroids
 
         public override void Init()
         {
-            throw new NotImplementedException();
+            Pos.X = 0;
+            Pos.Y = 0;
         }
 
         public override void Update()
