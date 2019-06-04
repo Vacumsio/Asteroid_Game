@@ -45,10 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Asteroid.cs" />
     <Compile Include="Objects\Background.cs" />
     <Compile Include="Objects\BaseObject.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MainClass.cs" />
+    <Compile Include="Objects\Planets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Star.cs" />
   </ItemGroup>

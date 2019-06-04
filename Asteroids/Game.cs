@@ -63,6 +63,9 @@ namespace Asteroids
             
         }
 
+        /// <summary>
+        /// Метод отрисовки объектов
+        /// </summary>
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
@@ -74,6 +77,9 @@ namespace Asteroids
             Buffer.Render();
         }
 
+        /// <summary>
+        /// Метод обновления отрисованных объектов из памяти
+        /// </summary>
         public static void Update()
         {
             _background.Update();
@@ -83,6 +89,11 @@ namespace Asteroids
                 obj.Update();
         }
 
+        /// <summary>
+        /// Метод задающий временной интервал во время отрисовки объектов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void Timer_Tick(object sender, EventArgs e)
         {            
             Draw();
