@@ -12,6 +12,7 @@ namespace Asteroids
         public static int Height { get; set; }
         protected static BaseObject[] _objs;
         protected static BaseObject[] _stars;
+        protected static BaseObject[] _background;
 
         static Game()
         {
@@ -22,6 +23,12 @@ namespace Asteroids
             Random rnd = new Random();
             _objs = new BaseObject[100];
             _stars = new BaseObject[60];
+            _background = new BaseObject[1];
+
+            for (int i = 0; i < _background.Length; i++)
+            {
+                _background[i] = new BaseObject(new Point(0, 0), new Point(0, 0), new Size(500,500));
+            }
 
             for (int i = 0; i < _objs.Length; i++)
             {
@@ -39,28 +46,25 @@ namespace Asteroids
         }
 
         public static void Init(Form form)
-        {
-            // Графическое устройство для вывода графики            
+        {                    
             Graphics g;
-            // Предоставляет доступ к главному буферу графического контекста для текущего приложения
             _context = BufferedGraphicsManager.Current;
             g = form.CreateGraphics();
-            // Создаем объект (поверхность рисования) и связываем его с формой
-            // Запоминаем размеры формы
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
-            // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
-
             Timer timer = new Timer { Interval = 50 };
             timer.Start();
             timer.Tick += Timer_Tick;
             Load();
+            
         }
 
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
+            foreach (BaseObject obj in _background)
+                obj.Draw();
             foreach (BaseObject obj in _objs)
                 obj.Draw();
             foreach (BaseObject obj in _stars)
@@ -70,6 +74,8 @@ namespace Asteroids
 
         public static void Update()
         {
+            foreach (BaseObject obj in _background)
+                obj.Update();
             foreach (BaseObject obj in _objs)
                 obj.Update();
             foreach (BaseObject obj in _stars)
@@ -77,7 +83,7 @@ namespace Asteroids
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
-        {
+        {            
             Draw();
             Update();
         }
