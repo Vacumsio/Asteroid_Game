@@ -18,6 +18,9 @@ namespace Asteroids
         {
         }
 
+        /// <summary>
+        /// Метод загрузки в память создаваемых объектов
+        /// </summary>
         public static void Load()
         {
             Random rnd = new Random();
@@ -41,6 +44,10 @@ namespace Asteroids
             }
         }
 
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        /// <param name="form"></param>
         public static void Init(Form form)
         {                    
             Graphics g;
