@@ -11,8 +11,8 @@ namespace Asteroids
         public static int Width { get; set; }
         public static int Height { get; set; }
         protected static BaseObject[] _objs;
-        protected static BaseObject[] _stars;
-        protected static BaseObject[] _background;
+        protected static Star[] _stars;
+        protected static Background _background;
 
         static Game()
         {
@@ -22,13 +22,9 @@ namespace Asteroids
         {
             Random rnd = new Random();
             _objs = new BaseObject[100];
-            _stars = new BaseObject[60];
-            _background = new BaseObject[1];
+            _stars = new Star[60];
+            _background = new Background(new Point(0, 0), new Point(0, 0), new Size(1000,1000));
 
-            for (int i = 0; i < _background.Length; i++)
-            {
-                _background[i] = new BaseObject(new Point(0, 0), new Point(0, 0), new Size(500,500));
-            }
 
             for (int i = 0; i < _objs.Length; i++)
             {
@@ -63,22 +59,20 @@ namespace Asteroids
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
-            foreach (BaseObject obj in _background)
-                obj.Draw();
+            _background.Draw();
             foreach (BaseObject obj in _objs)
                 obj.Draw();
-            foreach (BaseObject obj in _stars)
+            foreach (Star obj in _stars)
                 obj.Draw();
             Buffer.Render();
         }
 
         public static void Update()
         {
-            foreach (BaseObject obj in _background)
-                obj.Update();
+            _background.Update();
             foreach (BaseObject obj in _objs)
                 obj.Update();
-            foreach (BaseObject obj in _stars)
+            foreach (Star obj in _stars)
                 obj.Update();
         }
 
