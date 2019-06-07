@@ -2,6 +2,7 @@
 using System.Drawing;
 using System;
 using Asteroids.Objects;
+using System.Media;
 
 namespace Asteroids
 {
@@ -65,8 +66,8 @@ namespace Asteroids
             Load();
 
             Timer timer = new Timer { Interval = 50 };
-            timer.Start();
             timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
 
@@ -78,7 +79,7 @@ namespace Asteroids
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[20];
+            _asteroids = new Asteroid[14];
             _planets = new Planets[2];
             _bullet = new Bullet(new Point(0,1080), new Point(15,0), new Size(20,5));
             
@@ -132,7 +133,7 @@ namespace Asteroids
             foreach (Asteroid a in _asteroids)
             {
                 a.Update();
-                if (a.Collision(_bullet)) { System.Media.SystemSounds.Hand.Play(); }
+                if (a.Collision(_bullet)) { SystemSounds.Beep.Play(); }
             }
             foreach (Planets obj in _planets)
                 obj.Update();
