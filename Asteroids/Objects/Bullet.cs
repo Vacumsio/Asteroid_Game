@@ -24,7 +24,6 @@ namespace Asteroids.Objects
             if (Pos.X>Game.GetWidth())
             {
                 Pos.X = 0;
-                Draw();
             }
         }
     }
