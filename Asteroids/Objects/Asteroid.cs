@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Asteroids.Objects
 {
-    class Asteroid : BaseObject
+    class Asteroid : BaseObject, ICloneable
     {
         public int Power { get; set; }
         public Image _img;
@@ -33,6 +33,13 @@ namespace Asteroids.Objects
         {
             Pos.X = Pos.X + Dir.X;
             if (Pos.X < 0) Pos.X = Game.GetWidth() + Size.Width;
+        }
+
+        public object Clone()
+        {
+            Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height));
+            asteroid.Power = Power;
+            return asteroid;
         }
     }
 }

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICrash.cs" />
     <Compile Include="Objects\Asteroid.cs" />
     <Compile Include="Objects\Background.cs" />
     <Compile Include="Objects\BaseObject.cs" />
