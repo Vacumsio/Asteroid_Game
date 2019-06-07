@@ -2,7 +2,7 @@
 
 namespace Asteroids.Objects
 {
-    abstract class BaseObject
+    abstract class BaseObject : ICollision
     {
         protected Point Pos;
         protected Point Dir;
@@ -18,5 +18,9 @@ namespace Asteroids.Objects
         public abstract void Draw();
 
         public abstract void Update();
+
+        public bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
+
+        public Rectangle Rect => new Rectangle(Pos, Size);
     }
 }

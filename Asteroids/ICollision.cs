@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Asteroids
 {
-    interface ICrash
-    {
-        
-        bool Collision(ICrash obj);
+    interface ICollision
+    {        
+        bool Collision(ICollision obj);
 
         Rectangle Rect { get; }
     }

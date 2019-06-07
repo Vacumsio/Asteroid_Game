@@ -111,14 +111,13 @@ namespace Asteroids
         {
             Buffer.Graphics.Clear(Color.Black);
             _background.Draw();
-            _bullet.Draw();
-
             foreach (Star obj in _stars)
                 obj.Draw();
             foreach (Asteroid obj in _asteroids)
                 obj.Draw();
             foreach (Planets obj in _planets)
                 obj.Draw();
+            _bullet.Draw();
             Buffer.Render();
         }
 
@@ -130,9 +129,10 @@ namespace Asteroids
             _background.Update();
             foreach (Star obj in _stars)
                 obj.Update();
-            foreach (Asteroid obj in _asteroids)
+            foreach (Asteroid a in _asteroids)
             {
-                obj.Update();
+                a.Update();
+                if (a.Collision(_bullet)) { System.Media.SystemSounds.Hand.Play(); }
             }
             foreach (Planets obj in _planets)
                 obj.Update();
