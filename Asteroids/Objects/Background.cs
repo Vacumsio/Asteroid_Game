@@ -23,8 +23,6 @@ namespace Asteroids
 
         public override void Update()
         {
-            Pos.X = 0;
-            Pos.Y = 0;
         }
     }
 }

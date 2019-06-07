@@ -2,28 +2,28 @@
 
 namespace Asteroids
 {
-    class BaseObject
+    abstract class BaseObject
     {
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
 
-        public BaseObject(Point pos, Point dir, Size size)
+        protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
         }
 
-        public virtual void Draw()
-        {
-            Game.Buffer.Graphics.DrawEllipse(Pens.DarkOliveGreen, Pos.X, Pos.Y, Size.Width, Size.Height);
-        }
+        public abstract void Draw();
 
         public virtual void Update()
         {
             Pos.X = Pos.X - Dir.X*2;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
+
+            if (Pos.X < 0)
+                Pos.X = Game.GetWidth() + Size.Width;
+
             //Pos.X = Pos.X + Dir.X;
             //Pos.Y = Pos.Y + Dir.Y;
             //if (Pos.X < 0) Dir.X = -Dir.X;
