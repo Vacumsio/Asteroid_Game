@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Asteroids
+namespace Asteroids.Objects
 {
     abstract class BaseObject
     {

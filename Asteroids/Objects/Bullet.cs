@@ -7,22 +7,20 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Objects
 {
-    class Background : BaseObject
+    class Bullet : BaseObject
     {
-
-        Image image = Image.FromFile("Fon.jpg");
-
-        public Background(Point pos, Point dir, Size size) : base(pos, dir, size)
+        public Bullet(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
         }
 
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(image,this.Pos);
+            Game.Buffer.Graphics.DrawRectangle(Pens.OrangeRed, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
 
         public override void Update()
         {
+            Pos.X = Pos.X + 3;
         }
     }
 }

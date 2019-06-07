@@ -14,6 +14,7 @@ namespace Asteroids
         protected static Background _background;
         protected static Asteroid[] _asteroids;
         protected static Planets[] _planets;
+        private static Bullet _bullet;
 
         public static int width;
         public static int height;
@@ -75,11 +76,12 @@ namespace Asteroids
         public static void Load()
         {
             Random rnd = new Random();            
-            _stars = new Star[60];
+            _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
             _asteroids = new Asteroid[20];
             _planets = new Planets[2];
-
+            _bullet = new Bullet(new Point(0,1080), new Point(15,0), new Size(20,5));
+            
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 int s = rnd.Next(1, 12);
@@ -108,7 +110,9 @@ namespace Asteroids
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
-            _background.Draw();            
+            _background.Draw();
+            _bullet.Draw();
+
             foreach (Star obj in _stars)
                 obj.Draw();
             foreach (Asteroid obj in _asteroids)
@@ -127,10 +131,12 @@ namespace Asteroids
             foreach (Star obj in _stars)
                 obj.Update();
             foreach (Asteroid obj in _asteroids)
+            {
                 obj.Update();
+            }
             foreach (Planets obj in _planets)
                 obj.Update();
-
+            _bullet.Update();
         }
 
         /// <summary>
