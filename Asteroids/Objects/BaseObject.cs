@@ -22,7 +22,7 @@ namespace Asteroids
 
         public virtual void Update()
         {
-            Pos.X = Pos.X + Dir.X;
+            Pos.X = Pos.X - Dir.X*2;
             if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
             //Pos.X = Pos.X + Dir.X;
             //Pos.Y = Pos.Y + Dir.Y;

@@ -13,10 +13,32 @@ namespace Asteroids
         protected static BaseObject[] _objs;
         protected static Star[] _stars;
         protected static Background _background;
+        protected static Asteroid[] _asteroids;
 
         static Game()
         {
         }
+
+
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        /// <param name="form"></param>
+        public static void Init(Form form)
+        {
+            Graphics g;
+            _context = BufferedGraphicsManager.Current;
+            g = form.CreateGraphics();
+            Width = form.ClientSize.Width;
+            Height = form.ClientSize.Height;
+            Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
+            Timer timer = new Timer { Interval = 50 };
+            timer.Start();
+            timer.Tick += Timer_Tick;
+            Load();
+
+        }
+
 
         /// <summary>
         /// Метод загрузки в память создаваемых объектов
@@ -27,7 +49,14 @@ namespace Asteroids
             _objs = new BaseObject[100];
             _stars = new Star[60];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(1000,1000));
+            _asteroids = new Asteroid[20];
 
+            for (int i = 0; i < _asteroids.Length; i++)
+            {
+                int s = rnd.Next(3, 4);
+                int p = rnd.Next(0, 1080);
+                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s - i, 0), new Size(s, s));
+            }
 
             for (int i = 0; i < _objs.Length; i++)
             {
@@ -45,31 +74,14 @@ namespace Asteroids
         }
 
         /// <summary>
-        /// Инициализация формы
-        /// </summary>
-        /// <param name="form"></param>
-        public static void Init(Form form)
-        {                    
-            Graphics g;
-            _context = BufferedGraphicsManager.Current;
-            g = form.CreateGraphics();
-            Width = form.ClientSize.Width;
-            Height = form.ClientSize.Height;
-            Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
-            Timer timer = new Timer { Interval = 50 };
-            timer.Start();
-            timer.Tick += Timer_Tick;
-            Load();
-            
-        }
-
-        /// <summary>
         /// Метод отрисовки объектов
         /// </summary>
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
             _background.Draw();
+            foreach (Asteroid obj in _asteroids)
+                obj.Draw();
             foreach (BaseObject obj in _objs)
                 obj.Draw();
             foreach (Star obj in _stars)
@@ -83,6 +95,8 @@ namespace Asteroids
         public static void Update()
         {
             _background.Update();
+            foreach (Asteroid obj in _asteroids)
+                obj.Update();
             foreach (BaseObject obj in _objs)
                 obj.Update();
             foreach (Star obj in _stars)
