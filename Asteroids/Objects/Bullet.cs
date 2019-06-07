@@ -20,7 +20,12 @@ namespace Asteroids.Objects
 
         public override void Update()
         {
-            Pos.X += 30;
+            Pos.X += 40;
+            if (Pos.X>Game.GetWidth())
+            {
+                Pos.X = 0;
+                Draw();
+            }
         }
     }
 }
