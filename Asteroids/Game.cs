@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System;
+using Asteroids.Objects;
 
 namespace Asteroids
 {
@@ -12,7 +13,8 @@ namespace Asteroids
         protected static Star[] _stars;
         protected static Background _background;
         protected static Asteroid[] _asteroids;
-        
+        protected static Planets[] _planets;
+
         public static int width;
         public static int height;
 
@@ -76,11 +78,12 @@ namespace Asteroids
             _stars = new Star[60];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
             _asteroids = new Asteroid[20];
+            _planets = new Planets[2];
 
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 int s = rnd.Next(1, 12);
-                int p = rnd.Next(10, 1060);
+                int p = rnd.Next(50, 980);
                 _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s - i, 0), new Size(s, s));
             }
 
@@ -88,7 +91,14 @@ namespace Asteroids
             {
                 int s = rnd.Next(1, 2);
                 int p = rnd.Next(0, 1080);
-                _stars[i] = new Star(new Point(1925, p), new Point(s-i, s), new Size(s, s));
+                _stars[i] = new Star(new Point(1925, p), new Point(s - i, s), new Size(s, s));
+            }
+
+            for (int i = 0; i < _planets.Length; i++)
+            {
+                int s = rnd.Next(0, 2);
+                int p = rnd.Next(100, 800);
+                _planets[i] = new Planets(new Point(1925, p), new Point(s-i*4, s), new Size(s, s));
             }
         }
 
@@ -98,10 +108,12 @@ namespace Asteroids
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
-            _background.Draw();
+            _background.Draw();            
+            foreach (Star obj in _stars)
+                obj.Draw();
             foreach (Asteroid obj in _asteroids)
                 obj.Draw();
-            foreach (Star obj in _stars)
+            foreach (Planets obj in _planets)
                 obj.Draw();
             Buffer.Render();
         }
@@ -112,10 +124,13 @@ namespace Asteroids
         public static void Update()
         {
             _background.Update();
-            foreach (Asteroid obj in _asteroids)
-                obj.Update();
             foreach (Star obj in _stars)
                 obj.Update();
+            foreach (Asteroid obj in _asteroids)
+                obj.Update();
+            foreach (Planets obj in _planets)
+                obj.Update();
+
         }
 
         /// <summary>
