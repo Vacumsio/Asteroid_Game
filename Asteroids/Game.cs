@@ -17,8 +17,8 @@ namespace Asteroids
         protected static Planets[] _planets;
         private static Bullet _bullet;
 
-        public static int width;
-        public static int height;
+        private static int width;
+        private static int height;
 
         public static int GetWidth() => width;
         public static int GetHeight() => height;
@@ -81,7 +81,7 @@ namespace Asteroids
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
             _asteroids = new Asteroid[14];
             _planets = new Planets[2];
-            _bullet = new Bullet(new Point(0,1080), new Point(15,0), new Size(20,5));
+            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15,0), new Size(20,5));
             
             for (int i = 0; i < _asteroids.Length; i++)
             {
@@ -94,7 +94,7 @@ namespace Asteroids
             {
                 int s = rnd.Next(1, 2);
                 int p = rnd.Next(0, 1080);
-                _stars[i] = new Star(new Point(1925, p), new Point(s - i, s), new Size(s, s));
+                _stars[i] = new Star(new Point(1925, rnd.Next(0,Game.height)), new Point(s - i, s), new Size(s, s));
             }
 
             for (int i = 0; i < _planets.Length; i++)
