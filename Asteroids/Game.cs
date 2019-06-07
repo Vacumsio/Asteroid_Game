@@ -53,7 +53,7 @@ namespace Asteroids
 
             for (int i = 0; i < _asteroids.Length; i++)
             {
-                int s = rnd.Next(3, 4);
+                int s = rnd.Next(1, 12);
                 int p = rnd.Next(0, 1080);
                 _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s - i, 0), new Size(s, s));
             }

@@ -20,17 +20,18 @@ namespace Asteroids
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
             rnd = new Random();
-            _img = Image.FromFile(_imgages[rnd.Next(0,_imgages.Length-1)]);
+            _img = Image.FromFile(_imgages[rnd.Next(0, _imgages.Length - 1)]);
         }
 
         public override void Draw()
         {
+
             Game.Buffer.Graphics.DrawImage(_img, this.Pos);
         }
 
         public override void Update()
         {
-            rnd = new Random();
+            
             Pos.X = Pos.X + Dir.X;
             if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
         }
