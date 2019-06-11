@@ -19,5 +19,10 @@ namespace Asteroids.Objects
             Pos.X += Dir.X;
             if (Pos.X < 0) Pos.X = Game.GetWidth() + Size.Width;
         }
+
+        public override void Init()
+        {
+
+        }
     }
 }

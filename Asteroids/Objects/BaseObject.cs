@@ -19,6 +19,7 @@ namespace Asteroids.Objects
 
         public abstract void Update();
 
+        public abstract void Init();
 
         public bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Asteroids.Objects
 {
@@ -23,6 +18,11 @@ namespace Asteroids.Objects
 
         public override void Update()
         {
+        }
+
+        public override void Init()
+        {
+
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Objects
 {
@@ -33,6 +29,11 @@ namespace Asteroids.Objects
 
             Pos.X = Pos.X + Dir.X;
             if (Pos.X < 0) Pos.X = Game.GetWidth() + Size.Width;
+        }
+
+        public override void Init()
+        {
+
         }
     }
 }

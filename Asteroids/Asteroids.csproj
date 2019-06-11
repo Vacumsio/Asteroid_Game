@@ -55,9 +55,44 @@
     <Compile Include="Objects\Planets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Star.cs" />
+    <Compile Include="Properties\Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\asteroids\asteroid1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\asteroids\asteroid2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\asteroids\asteroid3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\asteroids\asteroid4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\asteroids\asteroid5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\planets\planet1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\planets\planet2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Fon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

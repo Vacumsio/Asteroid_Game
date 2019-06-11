@@ -25,12 +25,12 @@ namespace Asteroids
 
         public static void SetWidth(int value)
         {
-            //if (value >= 1920 || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
+            //if (value >= GetWidth() || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
             width = value;
         }
         public static void SetHeight(int value)
         {
-            //if (value >= 1080 || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
+            //if (value >= GetHeight() || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
             height = value;
         }
 
@@ -79,7 +79,7 @@ namespace Asteroids
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[14];
+            _asteroids = new Asteroid[6];
             _planets = new Planets[2];
             _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15,0), new Size(20,5));
             

@@ -2,6 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+
+/// <summary>
+/// Игра "Астероид".
+/// Гагарский Петр Е., 2 курс С#.
+/// </summary>
+/// 
 namespace Asteroids
 {
     class MainClass

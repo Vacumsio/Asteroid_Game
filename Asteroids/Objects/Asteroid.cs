@@ -35,6 +35,11 @@ namespace Asteroids.Objects
             if (Pos.X < 0) Pos.X = Game.GetWidth() + Size.Width;
         }
 
+        public override void Init()
+        {
+
+        }
+
         public object Clone()
         {
             Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height));
