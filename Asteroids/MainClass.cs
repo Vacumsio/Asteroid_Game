@@ -8,6 +8,7 @@ using System.Windows.Forms;
 /// Гагарский Петр Е., 2 курс С#.
 /// </summary>
 /// 
+//lesson_3
 namespace Asteroids
 {
     class MainClass
