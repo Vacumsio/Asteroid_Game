@@ -3,11 +3,26 @@ using System.Drawing;
 using System;
 using Asteroids.Objects;
 using System.Media;
+using System.Windows.Media;
+using Color = System.Drawing.Color;
 
 namespace Asteroids
 {
     class Game
     {
+        /// <summary>
+        /// Плеййер для снаряда
+        /// </summary>
+        public static MediaPlayer bul = new MediaPlayer();
+        public static string pathToFileBul = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shot.wav");
+
+        /// <summary>
+        /// Плейер для астероида
+        /// </summary>
+        public static MediaPlayer aster = new MediaPlayer();
+        public static string pathToFileAster = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "band.wav");
+
+
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
 
@@ -76,31 +91,32 @@ namespace Asteroids
         /// </summary>
         public static void Load()
         {
+            int s, p;
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[6];
+            _asteroids = new Asteroid[14];
             _planets = new Planets[2];
-            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15,0), new Size(20,5));
+            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15,0), new Size(50,3));
             
             for (int i = 0; i < _asteroids.Length; i++)
             {
-                int s = rnd.Next(1, 12);
-                int p = rnd.Next(50, 980);
-                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s - i, 0), new Size(s, s));
+                s = rnd.Next(50, 75);
+                p = rnd.Next(50, 980);
+                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s, 0), new Size(s, s), rnd.Next(1, 5));
             }
 
             for (int i = 0; i < _stars.Length; i++)
             {
-                int s = rnd.Next(1, 2);
-                int p = rnd.Next(0, 1080);
+                s = rnd.Next(1, 2);
+                p = rnd.Next(0, 1080);
                 _stars[i] = new Star(new Point(1925, rnd.Next(0,Game.height)), new Point(s - i, s), new Size(s, s));
             }
 
             for (int i = 0; i < _planets.Length; i++)
             {
-                int s = rnd.Next(0, 2);
-                int p = rnd.Next(100, 800);
+                s = rnd.Next(0, 2);
+                p = rnd.Next(100, 800);
                 _planets[i] = new Planets(new Point(1925, p), new Point(s-i*4, s), new Size(s, s));
             }
         }

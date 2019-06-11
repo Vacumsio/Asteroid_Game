@@ -1,50 +1,97 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace Asteroids.Objects
 {
-    class Asteroid : BaseObject, ICloneable
+    class Asteroid : BaseObject
     {
-        public int Power { get; set; }
-        public Image _img;
-        public Random rnd;
-        string[] _imgages = new string[]
-        {
-            "asteroids/asteroid1.png",
-            "asteroids/asteroid2.png",
-            "asteroids/asteroid3.png",
-            "asteroids/asteroid4.png",
-            "asteroids/asteroid5.png"
-        };
 
-        public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
+        /// <summary>
+        /// Содержит картинку объекта
+        /// </summary>
+        public Bitmap Image { get; private set; }
+
+        /// <summary>
+        /// Пока не понятно для чего это свойство в классе!
+        /// </summary>
+        public int Power { get; set; }
+
+        /// <summary>
+        /// Содержит текущую тип картинки
+        /// </summary>
+        public int ObjType { get; private set; }
+
+        /// <summary>
+        /// Хранит разные реализации картинок объектов из ресурсов
+        /// </summary>
+        internal static Dictionary<int, Image> ObjTypes = new Dictionary<int, Image>();
+
+        /// <summary>
+        /// статический конструктор для наполнения словаря для всех экземпляров
+        /// </summary>
+        static Asteroid()
         {
-            Power = 1;
-            rnd = new Random();
-            _img = Image.FromFile(_imgages[rnd.Next(0, _imgages.Length - 1)]);
+            ObjTypes.Add(1, Properties.Resource1.asteroid1);
+            ObjTypes.Add(2, Properties.Resource1.asteroid2);
+            ObjTypes.Add(3, Properties.Resource1.asteroid3);
+            ObjTypes.Add(4, Properties.Resource1.asteroid4);
+            ObjTypes.Add(5, Properties.Resource1.asteroid5);
         }
 
+        /// <summary>
+        /// Экземплярный конструктор
+        /// </summary>
+        /// <param name="pos">Положение на поле</param>
+        /// <param name="dir">дельта перемещения</param>
+        /// <param name="size">Размер</param>
+        public Asteroid(Point pos, Point dir, Size size, int type) : base(pos, dir, size)
+        {
+            this.Power = 1;
+            this.Image = new Bitmap(ObjTypes.ElementAt(type).Value);
+        }
+
+
+        /// <summary>
+        /// Перекрытый метод отрисовки
+        /// </summary>
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(_img, this.Pos);
+            Game.Buffer.Graphics.DrawImage(this.Image, this.Pos.X, this.Pos.Y, this.Size.Width, this.Size.Height);
         }
 
+        /// <summary>
+        /// Перекрытый метод обновления 
+        /// </summary>
         public override void Update()
         {
-            Pos.X = Pos.X + Dir.X;
-            if (Pos.X < 0) Pos.X = Game.GetWidth() + Size.Width;
+            this.Pos.X -= this.Dir.X;
+            if (this.Pos.X + this.Size.Width <= 0)
+            {
+                this.Init();
+            }
         }
 
+        /// <summary>
+        /// Перекрытый метод инициализации
+        /// </summary>
         public override void Init()
         {
-
+            Random rnd = new Random();
+            this.Pos.X = Game.GetWidth();
+            this.Pos.Y = rnd.Next(this.Size.Height, Game.GetHeight() - this.Size.Height);
+            this.ObjType = rnd.Next(1, ObjTypes.Count);
+            this.Image = (Bitmap)ObjTypes.ElementAt(this.ObjType).Value;
         }
 
-        public object Clone()
+        /// <summary>
+        /// Воспроизводит звук взрыва
+        /// </summary>
+        public void Play()
         {
-            Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height));
-            asteroid.Power = Power;
-            return asteroid;
+            Game.aster.Open(new Uri(Game.pathToFileAster));
+            Game.aster.Play();
         }
     }
 }
