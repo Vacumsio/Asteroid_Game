@@ -95,13 +95,13 @@ namespace Asteroids
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[14];
+            _asteroids = new Asteroid[7];
             _planets = new Planets[2];
-            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15,0), new Size(50,3));
+            _bullet = new Bullet(new Point(20, rnd.Next(10, Game.height)), new Point(15,0), new Size(50,3));
             
             for (int i = 0; i < _asteroids.Length; i++)
             {
-                s = rnd.Next(50, 75);
+                s = rnd.Next(30, 90);
                 p = rnd.Next(50, 980);
                 _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s, 0), new Size(s, s), rnd.Next(1, 5));
             }

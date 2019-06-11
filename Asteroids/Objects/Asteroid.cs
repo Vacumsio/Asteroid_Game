@@ -52,7 +52,6 @@ namespace Asteroids.Objects
             this.Image = new Bitmap(ObjTypes.ElementAt(type).Value);
         }
 
-
         /// <summary>
         /// Перекрытый метод отрисовки
         /// </summary>
