@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Asteroids.Objects
 {
+    /// <summary>
+    /// Объект игры Планеты
+    /// </summary>
     class Planets : BaseObject
     {
         private Image _img;
