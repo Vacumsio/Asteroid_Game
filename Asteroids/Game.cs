@@ -103,7 +103,7 @@ namespace Asteroids
             {
                 s = rnd.Next(30, 90);
                 p = rnd.Next(50, 980);
-                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(s, 0), new Size(s, s), rnd.Next(1, 5));
+                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(35, 0), new Size(s, s), rnd.Next(4));
             }
 
             for (int i = 0; i < _stars.Length; i++)
@@ -115,9 +115,9 @@ namespace Asteroids
 
             for (int i = 0; i < _planets.Length; i++)
             {
-                s = rnd.Next(0, 2);
+                s = rnd.Next(150, 200);
                 p = rnd.Next(100, 800);
-                _planets[i] = new Planets(new Point(1925, p), new Point(s-i*4, s), new Size(s, s));
+                _planets[i] = new Planets(new Point(1925, p), new Point(5, 0), new Size(s, s),rnd.Next(1));
             }
         }
 
