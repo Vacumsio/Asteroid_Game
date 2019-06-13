@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Asteroids.Objects
 {
@@ -15,16 +16,26 @@ namespace Asteroids.Objects
 
         public override void Update()
         {
-            Pos.X += 40;
-            if (Pos.X>Game.GetWidth())
+            this.Pos.X = this.Pos.X + 35;
+            if (this.Pos.X >= Game.GetWidth())
             {
-                Pos.X = 0;
+                this.Init();
             }
         }
 
         public override void Init()
         {
 
+            this.Play();
+            Random rnd = new Random();
+            this.Pos.X = 0;
+            this.Pos.Y = rnd.Next(10, Game.GetHeight() - 10);
+        }
+
+        public void Play()
+        {
+            Game.bul.Open(new Uri(Game.pathToFileBul));
+            Game.bul.Play();
         }
     }
 }

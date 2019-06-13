@@ -15,8 +15,7 @@ namespace Asteroids
     {
         static void Main(string[] args)
         {
-            using (Form form = new Form())
-            {
+            Form form = new Form();
                 try
                 {
                     form.Width = 1920;
@@ -30,8 +29,7 @@ namespace Asteroids
                 {
                     Console.WriteLine(ex);
                     throw;
-                }
-            }            
+                }     
         }
     }
 }

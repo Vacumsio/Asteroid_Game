@@ -56,6 +56,7 @@
     <Compile Include="MainClass.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Objects\Planets.cs" />
+    <Compile Include="Objects\Ship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Star.cs" />
     <Compile Include="Properties\Resource1.Designer.cs">
@@ -96,6 +97,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Fon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\ships\ship1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\ships\ship2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\aids\Health.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\aids\Power.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\aids\Shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\aids\Speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\band.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\shot.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

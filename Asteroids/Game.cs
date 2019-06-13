@@ -5,6 +5,7 @@ using Asteroids.Objects;
 using System.Media;
 using System.Windows.Media;
 using Color = System.Drawing.Color;
+using Brushes = System.Drawing.Brushes;
 
 namespace Asteroids
 {
@@ -31,6 +32,7 @@ namespace Asteroids
         protected static Asteroid[] _asteroids;
         protected static Planets[] _planets;
         private static Bullet _bullet;
+        private static Ship _ship;
 
         private static int width;
         private static int height;
@@ -80,9 +82,11 @@ namespace Asteroids
 
             Load();
 
-            Timer timer = new Timer { Interval = 50 };
+            Timer timer = new Timer { Interval = 40 };
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            form.KeyDown += Form_KeyDown;
         }
 
 
@@ -95,15 +99,16 @@ namespace Asteroids
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[7];
-            _planets = new Planets[2];
-            _bullet = new Bullet(new Point(20, rnd.Next(10, Game.height)), new Point(15,0), new Size(50,3));
-            
+            _asteroids = new Asteroid[6];
+            _planets = new Planets[1];
+            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(0,0), new Size(30,1));
+            _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(50, 50));
+
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 s = rnd.Next(30, 90);
                 p = rnd.Next(50, 980);
-                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(35, 0), new Size(s, s), rnd.Next(4));
+                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(15, 0), new Size(s, s), rnd.Next(4));
             }
 
             for (int i = 0; i < _stars.Length; i++)
@@ -115,7 +120,7 @@ namespace Asteroids
 
             for (int i = 0; i < _planets.Length; i++)
             {
-                s = rnd.Next(150, 200);
+                s = rnd.Next(80, 150);
                 p = rnd.Next(100, 800);
                 _planets[i] = new Planets(new Point(1925, p), new Point(5, 0), new Size(s, s),rnd.Next(1));
             }
@@ -128,13 +133,16 @@ namespace Asteroids
         {
             Buffer.Graphics.Clear(Color.Black);
             _background.Draw();
-            foreach (Star obj in _stars)
-                obj.Draw();
-            foreach (Asteroid obj in _asteroids)
-                obj.Draw();
-            foreach (Planets obj in _planets)
-                obj.Draw();
+            foreach (Star s in _stars)
+                s.Draw();
+            foreach (Asteroid a in _asteroids)
+                a.Draw();
+            foreach (Planets p in _planets)
+                p.Draw();
             _bullet.Draw();
+            _ship.Draw();
+            if (_ship != null)
+                Buffer.Graphics.DrawString("Energy:" + _ship.Energy, SystemFonts.CaptionFont, Brushes.White, 0, 0);
             Buffer.Render();
         }
 
@@ -144,15 +152,21 @@ namespace Asteroids
         public static void Update()
         {
             _background.Update();
-            foreach (Star obj in _stars)
-                obj.Update();
+            foreach (Star s in _stars)
+                s.Update();
             foreach (Asteroid a in _asteroids)
             {
                 a.Update();
-                if (a.Collision(_bullet)) { SystemSounds.Beep.Play(); }
+                if (a.Collision(_bullet))
+                {
+                    a.Play();
+                    a.Init();
+                    _bullet.Init();
+                }
             }
-            foreach (Planets obj in _planets)
-                obj.Update();
+            foreach (Planets p in _planets)
+                p.Update();
+            _ship.Update();
             _bullet.Update();
         }
 
@@ -165,6 +179,13 @@ namespace Asteroids
         {            
             Draw();
             Update();
+        }
+
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey) _bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
+            if (e.KeyCode == Keys.Up) _ship.Up();
+            if (e.KeyCode == Keys.Down) _ship.Down();
         }
     }
 }
