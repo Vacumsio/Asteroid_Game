@@ -91,10 +91,5 @@ namespace Asteroids.Objects
             Game.aster.Open(new Uri(Game.pathToFileAster));
             Game.aster.Play();
         }
-
-        public void Dispose()
-        {
-            
-        }
     }
 }

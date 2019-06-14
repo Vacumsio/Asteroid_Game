@@ -32,7 +32,9 @@ namespace Asteroids
         public static MediaPlayer heal = new MediaPlayer();
         public static string pathToHeal = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Heal.wav");
 
-
+        /// <summary>
+        /// Плейер ГЛАВНЫЙ ТЕМЫ
+        /// </summary>
         public static MediaPlayer mainTheme = new MediaPlayer();
         public static string pathToMainTheme = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Main_theme.wav");
 
@@ -91,10 +93,7 @@ namespace Asteroids
             Buffer = _context.Allocate(g, new Rectangle(0, 0, GetWidth(), GetHeight()));
 
             Load();
-
-            mainTheme.Open(new Uri(pathToMainTheme));
-            mainTheme.Play();
-
+            
             Timer timer = new Timer { Interval = 40 };
             timer.Tick += Timer_Tick;
             timer.Start();
@@ -107,7 +106,7 @@ namespace Asteroids
         /// Метод загрузки в память создаваемых объектов
         /// </summary>
         public static void Load()
-        {
+        {            
             int s, p;
             Random rnd = new Random();
             _stars = new Star[100];
@@ -145,7 +144,6 @@ namespace Asteroids
         /// </summary>
         public static void Draw()
         {
-            Buffer.Graphics.Clear(Color.Black);
             _background.Draw();
             foreach (Star s in _stars)
                 s.Draw();
@@ -189,7 +187,6 @@ namespace Asteroids
                 {
                     a.Play();
                     a.Init();
-                    a.Dispose();
                     _bullet.Init();
                 }
                 if (a.Collision(_ship))
