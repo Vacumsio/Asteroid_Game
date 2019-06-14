@@ -25,7 +25,7 @@ namespace Asteroids.Objects
         internal static Dictionary<int, Image> ObjTypes = new Dictionary<int, Image>();
 
         /// <summary>
-        /// статический конструктор для наполнения словаря для всех экземпляров
+        /// статический конструктор для наполнения словаря
         /// </summary>
         
         static Ship()
@@ -33,7 +33,15 @@ namespace Asteroids.Objects
             ObjTypes.Add(0, Properties.Resource1.ship2);
         }
 
+        /// <summary>
+        /// Сумма повреждений до наступления смерти
+        /// </summary>
         public int Energy { get; set; } = 100;
+
+        /// <summary>
+        /// Защита поглощающая урон. После 0 - урон наносится по Energy
+        /// </summary>
+        public int Shield { get; set; } = 100;
 
         public void EnergyLow(int n)
         {
@@ -42,7 +50,6 @@ namespace Asteroids.Objects
 
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-
             this.Image = new Bitmap(ObjTypes.ElementAt(0).Value);
         }
         public override void Draw()
