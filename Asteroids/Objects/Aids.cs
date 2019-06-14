@@ -16,9 +16,9 @@ namespace Asteroids.Objects
         public Bitmap Image { get; private set; }
 
         /// <summary>
-        /// Пока не понятно для чего это свойство в классе!
+        /// Здоровье
         /// </summary>
-        public int Power { get; set; }
+        public int Health { get; set; }
 
         /// <summary>
         /// Содержит текущую тип картинки
