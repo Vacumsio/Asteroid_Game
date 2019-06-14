@@ -1,11 +1,10 @@
-﻿using System.Windows.Forms;
-using System.Drawing;
+﻿using Asteroids.Objects;
 using System;
-using Asteroids.Objects;
-using System.Media;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Windows.Media;
-using Color = System.Drawing.Color;
 using Brushes = System.Drawing.Brushes;
+using Color = System.Drawing.Color;
 
 namespace Asteroids
 {
@@ -42,12 +41,12 @@ namespace Asteroids
 
         public static void SetWidth(int value)
         {
-            //if (value >= GetWidth() || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
+            if (value >= 1921 || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
             width = value;
         }
         public static void SetHeight(int value)
         {
-            //if (value >= GetHeight() || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
+            if (value >= 1081 || value < 0) throw new ArgumentOutOfRangeException("Выход за пределы игрового поля");
             height = value;
         }
 
@@ -70,10 +69,9 @@ namespace Asteroids
             form.MaximumSize = new Size(GetWidth(), GetHeight());
             form.MinimumSize = new Size(GetWidth(), GetHeight());
             form.FormBorderStyle = FormBorderStyle.FixedSingle;
-            form.WindowState = FormWindowState.Normal;
+            //form.WindowState = FormWindowState.Normal;
             form.WindowState = FormWindowState.Maximized;//полный экран
             form.FormBorderStyle = FormBorderStyle.None;//полный экран
-
 
             Graphics g;
             g = form.CreateGraphics();
@@ -96,33 +94,33 @@ namespace Asteroids
         public static void Load()
         {
             int s, p;
-            Random rnd = new Random();            
+            Random rnd = new Random();
             _stars = new Star[100];
-            _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
+            _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0, 0));
             _asteroids = new Asteroid[16];
             _planets = new Planets[1];
-            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(0,0), new Size(30,1));
+            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(0, 0), new Size(30, 1));
             _ship = new Ship(new Point(100, 400), new Point(50, 50), new Size(50, 50));
 
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 s = rnd.Next(30, 90);
                 p = rnd.Next(50, 980);
-                _asteroids[i] = new Asteroid(new Point(1925, p), new Point(15, 0), new Size(s, s), rnd.Next(4));
+                _asteroids[i] = new Asteroid(new Point(1920, p), new Point(15, 0), new Size(s, s), rnd.Next(4));
             }
 
             for (int i = 0; i < _stars.Length; i++)
             {
                 s = rnd.Next(1, 2);
                 p = rnd.Next(0, 1080);
-                _stars[i] = new Star(new Point(1925, rnd.Next(0,Game.height)), new Point(s - i, s), new Size(s, s));
+                _stars[i] = new Star(new Point(1920, rnd.Next(0, Game.height)), new Point(s - i, s), new Size(s, s));
             }
 
             for (int i = 0; i < _planets.Length; i++)
             {
                 s = rnd.Next(80, 150);
                 p = rnd.Next(100, 800);
-                _planets[i] = new Planets(new Point(1925, p), new Point(5, 0), new Size(s, s),rnd.Next(1));
+                _planets[i] = new Planets(new Point(1920, p), new Point(5, 0), new Size(s, s), rnd.Next(1));
             }
         }
 
@@ -143,6 +141,7 @@ namespace Asteroids
             _ship.Draw();
             if (_ship != null)
                 Buffer.Graphics.DrawString("Energy:" + _ship.Energy, SystemFonts.CaptionFont, Brushes.White, 0, 0);
+            Buffer.Graphics.DrawString("Shiled:" + _ship.Shield, SystemFonts.CaptionFont, Brushes.White, 75, 0);
             Buffer.Render();
         }
 
@@ -162,6 +161,7 @@ namespace Asteroids
                 {
                     a.Play();
                     a.Init();
+                    a.Dispose();
                     _bullet.Init();
                 }
                 if (a.Collision(_ship))
@@ -169,14 +169,17 @@ namespace Asteroids
                     a.Play();
                     a.Init();
                     _ship.Init();
-                    _ship.Energy -= a.Power;
-                    if (_ship.Energy == 0)
+                    _ship.Shield -= a.Power;
+                    if (_ship.Shield == 0)
+                    {
+                        _ship.Energy -= a.Power;
+                    }
+                    else if (_ship.Energy == 0)
                     {
                         _ship.Die();
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -185,18 +188,23 @@ namespace Asteroids
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private static void Timer_Tick(object sender, EventArgs e)
-        {            
+        {
             Draw();
             Update();
         }
 
+        /// <summary>
+        /// Событие передвижение/атака
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void Form_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space) _bullet = new Bullet(new Point(_ship.Rect.X + 5, _ship.Rect.Y + 2), new Point(2, 0), new Size(30, 1));
+            if (e.KeyCode == Keys.Space) _bullet = new Bullet(new Point(_ship.Rect.X + 45, _ship.Rect.Y + 25), new Point(5, 0), new Size(20, 1));
             if (e.KeyCode == Keys.W) _ship.Up();
             if (e.KeyCode == Keys.S) _ship.Down();
             if (e.KeyCode == Keys.A) _ship.Left();
-            if (e.KeyCode == Keys.D) _ship.Left();
+            if (e.KeyCode == Keys.D) _ship.Right();
         }
     }
 }

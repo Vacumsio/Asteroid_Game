@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Objects
 {
@@ -13,7 +11,7 @@ namespace Asteroids.Objects
         /// Содержит картинку объекта
         /// </summary>
         public Bitmap Image { get; private set; }
-        
+
         /// <summary>
         /// Содержит текущую тип картинки
         /// </summary>
@@ -27,7 +25,7 @@ namespace Asteroids.Objects
         /// <summary>
         /// статический конструктор для наполнения словаря
         /// </summary>
-        
+
         static Ship()
         {
             ObjTypes.Add(0, Properties.Resource1.ship2);
@@ -43,10 +41,6 @@ namespace Asteroids.Objects
         /// </summary>
         public int Shield { get; set; } = 100;
 
-        public void EnergyLow(int n)
-        {
-            Energy -= n;
-        }
 
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -82,12 +76,12 @@ namespace Asteroids.Objects
         }
         public void Left()
         {
-            if (Dir.X < 0) Dir.X -= Dir.X;
+            if (Pos.X < 0) Pos.X = Pos.X - Dir.X;
         }
 
         public void Right()
         {
-            if (Dir.X > Game.GetWidth()) Dir.X += Dir.X;
+            if (Pos.X > Game.GetWidth()) Pos.X = Pos.X + Dir.X;
         }
 
         public void Die()

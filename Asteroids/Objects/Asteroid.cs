@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Asteroids.Objects
 {
-    class Asteroid : BaseObject
+    class Asteroid : BaseObject, IDisposable
     {
 
         /// <summary>
@@ -91,6 +91,11 @@ namespace Asteroids.Objects
         {
             Game.aster.Open(new Uri(Game.pathToFileAster));
             Game.aster.Play();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
