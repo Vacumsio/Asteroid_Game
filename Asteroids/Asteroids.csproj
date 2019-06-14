@@ -124,5 +124,17 @@
   <ItemGroup>
     <None Include="bin\Debug\shot.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Heal.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Main theme.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Heal.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Main theme.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

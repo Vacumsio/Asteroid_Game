@@ -166,4 +166,10 @@
   <data name="shot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\shot.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Heal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Heal.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Main_theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Main theme.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

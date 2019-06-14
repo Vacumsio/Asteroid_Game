@@ -26,6 +26,15 @@ namespace Asteroids
         public static MediaPlayer aster = new MediaPlayer();
         public static string pathToFileAster = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "band.wav");
 
+        /// <summary>
+        /// Плейер для лечения
+        /// </summary>
+        public static MediaPlayer heal = new MediaPlayer();
+        public static string pathToHeal = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Heal.wav");
+
+
+        public static MediaPlayer mainTheme = new MediaPlayer();
+        public static string pathToMainTheme = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Main_theme.wav");
 
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -82,6 +91,9 @@ namespace Asteroids
             Buffer = _context.Allocate(g, new Rectangle(0, 0, GetWidth(), GetHeight()));
 
             Load();
+
+            mainTheme.Open(new Uri(pathToMainTheme));
+            mainTheme.Play();
 
             Timer timer = new Timer { Interval = 40 };
             timer.Tick += Timer_Tick;
@@ -157,11 +169,14 @@ namespace Asteroids
         /// </summary>
         public static void Update()
         {
+
             _background.Update();
             _bullet.Update();
             _aids.Update();
             if (_ship.Collision(_aids))
             {
+
+                _aids.Play();
                 _ship.Energy += _aids.Struct;
                 _aids.Init();
             }

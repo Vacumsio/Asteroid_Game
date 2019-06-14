@@ -79,6 +79,12 @@ namespace Asteroids.Objects
             this.Image = (Bitmap)ObjTypes.ElementAt(this.ObjType).Value;
         }
 
+        public void Play()
+        {
+            Game.aster.Open(new Uri(Game.pathToHeal));
+            Game.aster.Play();
+        }
+
         public void Dispose()
         {
 
