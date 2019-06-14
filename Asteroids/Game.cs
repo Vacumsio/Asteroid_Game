@@ -55,7 +55,7 @@ namespace Asteroids
             height = value;
         }
 
-        static Game(){        }
+        static Game(){}
 
         /// <summary>
         /// Инициализация формы
@@ -104,7 +104,7 @@ namespace Asteroids
             _planets = new Planets[1];
             _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15, 0), new Size(30, 1));
             _ship = new Ship(new Point(100, 400), new Point(50, 50), new Size(50, 50));
-            _aids = new Aids(new Point(0, rnd.Next(0, Game.height)), new Point(15, 0), new Size(50, 50), rnd.Next(2));
+            _aids = new Aids(new Point(0, rnd.Next(0, Game.height)), new Point(20, 0), new Size(50, 50));
             
             for (int i = 0; i < _asteroids.Length; i++)
             {
@@ -162,7 +162,8 @@ namespace Asteroids
             _aids.Update();
             if (_ship.Collision(_aids))
             {
-                _ship.Energy+=_aids.
+                _ship.Energy += _aids.Struct;
+                _aids.Init();
             }
             foreach (Star s in _stars) s.Update();
             foreach (Planets p in _planets) p.Update();

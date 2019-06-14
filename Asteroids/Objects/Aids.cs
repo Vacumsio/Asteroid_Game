@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Objects
 {
@@ -18,7 +16,7 @@ namespace Asteroids.Objects
         /// <summary>
         /// Здоровье
         /// </summary>
-        public int Health { get; set; }
+        public int Struct { get; private set; } = 5;
 
         /// <summary>
         /// Содержит текущую тип картинки
@@ -36,8 +34,6 @@ namespace Asteroids.Objects
         static Aids()
         {
             ObjTypes.Add(1, Properties.Resource1.Health);
-            ObjTypes.Add(2, Properties.Resource1.Shield);
-            ObjTypes.Add(3, Properties.Resource1.Speed);
         }
 
         /// <summary>
@@ -46,9 +42,9 @@ namespace Asteroids.Objects
         /// <param name="pos">Положение на поле</param>
         /// <param name="dir">дельта перемещения</param>
         /// <param name="size">Размер</param>
-        public Aids(Point pos, Point dir, Size size, int type) : base(pos, dir, size)
+        public Aids(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            this.Image = new Bitmap(ObjTypes.ElementAt(type).Value);
+            this.Image = new Bitmap(ObjTypes.ElementAt(0).Value);
         }
 
         /// <summary>
@@ -79,8 +75,13 @@ namespace Asteroids.Objects
             Random rnd = new Random();
             this.Pos.X = Game.GetWidth();
             this.Pos.Y = rnd.Next(this.Size.Height, Game.GetHeight() - this.Size.Height);
-            this.ObjType = rnd.Next(1, ObjTypes.Count);
+            this.ObjType = rnd.Next(1);
             this.Image = (Bitmap)ObjTypes.ElementAt(this.ObjType).Value;
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 }

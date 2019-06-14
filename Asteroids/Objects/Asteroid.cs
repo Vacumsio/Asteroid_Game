@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Asteroids.Objects
 {
-    class Asteroid : BaseObject, IDisposable
+    class Asteroid : BaseObject
     {
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Asteroids.Objects
         /// <summary>
         /// Пока не понятно для чего это свойство в классе!
         /// </summary>
-        public int Power { get; set; }
+        public int Power { get; private set; } = 1;
 
         /// <summary>
         /// Содержит текущую тип картинки
@@ -48,7 +48,6 @@ namespace Asteroids.Objects
         /// <param name="size">Размер</param>
         public Asteroid(Point pos, Point dir, Size size, int type) : base(pos, dir, size)
         {
-            this.Power = 1;
             this.Image = new Bitmap(ObjTypes.ElementAt(type).Value);
         }
 
