@@ -36,7 +36,7 @@ namespace Asteroids
         protected static Planets[] _planets;
         private static Bullet _bullet;
         private static Ship _ship;
-
+        private static Aids _aids;
 
         private static int width;
         private static int height;
