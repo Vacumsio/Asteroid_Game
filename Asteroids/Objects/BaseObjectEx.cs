@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Objects
 {
-    class BaseObjectEx
+    class BaseObjectEx: Exception
     {
         /// <summary>
         /// Сбой игры
         /// </summary>
         /// <param name="message">Сообщение</param>
-        public GameObjectException(string message) : base(message)
+        public BaseObjectEx(string message) : base(message)
         {
 
         }
