@@ -99,10 +99,10 @@ namespace Asteroids
             Random rnd = new Random();            
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0,0));
-            _asteroids = new Asteroid[6];
+            _asteroids = new Asteroid[16];
             _planets = new Planets[1];
             _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(0,0), new Size(30,1));
-            _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(50, 50));
+            _ship = new Ship(new Point(100, 400), new Point(50, 50), new Size(50, 50));
 
             for (int i = 0; i < _asteroids.Length; i++)
             {
@@ -152,8 +152,9 @@ namespace Asteroids
         public static void Update()
         {
             _background.Update();
-            foreach (Star s in _stars)
-                s.Update();
+            _bullet.Update();
+            foreach (Star s in _stars) s.Update();
+            foreach (Planets p in _planets) p.Update();
             foreach (Asteroid a in _asteroids)
             {
                 a.Update();
@@ -163,11 +164,19 @@ namespace Asteroids
                     a.Init();
                     _bullet.Init();
                 }
+                if (a.Collision(_ship))
+                {
+                    a.Play();
+                    a.Init();
+                    _ship.Init();
+                    _ship.Energy -= a.Power;
+                    if (_ship.Energy == 0)
+                    {
+                        _ship.Die();
+                    }
+                }
             }
-            foreach (Planets p in _planets)
-                p.Update();
-            _ship.Update();
-            _bullet.Update();
+
         }
 
         /// <summary>
@@ -183,9 +192,11 @@ namespace Asteroids
 
         private static void Form_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.ControlKey) _bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
-            if (e.KeyCode == Keys.Up) _ship.Up();
-            if (e.KeyCode == Keys.Down) _ship.Down();
+            if (e.KeyCode == Keys.Space) _bullet = new Bullet(new Point(_ship.Rect.X + 5, _ship.Rect.Y + 2), new Point(2, 0), new Size(30, 1));
+            if (e.KeyCode == Keys.W) _ship.Up();
+            if (e.KeyCode == Keys.S) _ship.Down();
+            if (e.KeyCode == Keys.A) _ship.Left();
+            if (e.KeyCode == Keys.D) _ship.Left();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace Asteroids.Objects
         
         static Ship()
         {
-            ObjTypes.Add(1, Properties.Resource1.ship1);
+            ObjTypes.Add(0, Properties.Resource1.ship2);
         }
 
-        public int Energy { get; private set; } = 100;
+        public int Energy { get; set; } = 100;
 
         public void EnergyLow(int n)
         {
@@ -43,11 +43,12 @@ namespace Asteroids.Objects
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
 
-            //this.Image = new Bitmap(ObjTypes.ElementAt(1).Value);
+            this.Image = new Bitmap(ObjTypes.ElementAt(0).Value);
         }
         public override void Draw()
         {
 
+            Game.Buffer.Graphics.DrawImage(this.Image, this.Pos.X, this.Pos.Y, this.Size.Width, this.Size.Height);
         }
 
         public override void Update()
@@ -59,6 +60,11 @@ namespace Asteroids.Objects
         {
         }
 
+        public void Attack()
+        {
+
+        }
+
         public void Up()
         {
             if (Pos.Y > 0) Pos.Y = Pos.Y - Dir.Y;
@@ -67,9 +73,19 @@ namespace Asteroids.Objects
         {
             if (Pos.Y < Game.GetHeight()) Pos.Y = Pos.Y + Dir.Y;
         }
-        public void Die()
+        public void Left()
         {
+            if (Dir.X < 0) Dir.X -= Dir.X;
         }
 
+        public void Right()
+        {
+            if (Dir.X > Game.GetWidth()) Dir.X += Dir.X;
+        }
+
+        public void Die()
+        {
+            Environment.Exit(0);
+        }
     }
 }

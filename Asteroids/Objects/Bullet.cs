@@ -25,7 +25,6 @@ namespace Asteroids.Objects
 
         public override void Init()
         {
-
             this.Play();
             Random rnd = new Random();
             this.Pos.X = 0;
