@@ -140,8 +140,10 @@ namespace Asteroids
             _bullet.Draw();
             _ship.Draw();
             if (_ship != null)
-                Buffer.Graphics.DrawString("Energy:" + _ship.Energy, SystemFonts.CaptionFont, Brushes.White, 0, 0);
-            Buffer.Graphics.DrawString("Shiled:" + _ship.Shield, SystemFonts.CaptionFont, Brushes.White, 75, 0);
+            {
+                Buffer.Graphics.DrawString("Energy:" + _ship.Energy, SystemFonts.CaptionFont, Brushes.Wheat, 0, 1060);
+                Buffer.Graphics.DrawString("Shiled:" + _ship.Shield, SystemFonts.CaptionFont, Brushes.Wheat, 75, 1060);
+            }
             Buffer.Render();
         }
 
