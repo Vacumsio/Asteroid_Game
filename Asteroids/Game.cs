@@ -6,6 +6,10 @@ using System.Windows.Media;
 using Brushes = System.Drawing.Brushes;
 using Color = System.Drawing.Color;
 
+/// <summary>
+/// Игра "Астероид".
+/// Гагарский Петр Е., 2 курс С#.
+/// </summary>
 namespace Asteroids
 {
     class Game
@@ -32,6 +36,7 @@ namespace Asteroids
         protected static Planets[] _planets;
         private static Bullet _bullet;
         private static Ship _ship;
+
 
         private static int width;
         private static int height;
