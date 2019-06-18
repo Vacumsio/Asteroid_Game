@@ -4,9 +4,9 @@ namespace Asteroids.Objects
 {
     abstract class BaseObject : ICollision
     {
-        protected Point Pos;
-        protected Point Dir;
-        protected Size Size;
+        public Point Pos;
+        public Point Dir;
+        public Size Size;
 
         protected BaseObject(Point pos, Point dir, Size size)
         {

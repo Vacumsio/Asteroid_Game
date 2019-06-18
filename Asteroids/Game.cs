@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Media;
 using Brushes = System.Drawing.Brushes;
-using Color = System.Drawing.Color;
 
 /// <summary>
 /// Игра "Астероид".
@@ -66,7 +65,7 @@ namespace Asteroids
             height = value;
         }
 
-        static Game(){}
+        static Game() { }
 
         /// <summary>
         /// Инициализация формы
@@ -82,7 +81,7 @@ namespace Asteroids
             form.MinimizeBox = false;
             form.MaximumSize = new Size(GetWidth(), GetHeight());
             form.MinimumSize = new Size(GetWidth(), GetHeight());
-            form.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //form.FormBorderStyle = FormBorderStyle.FixedSingle;
             //form.WindowState = FormWindowState.Normal;
             form.WindowState = FormWindowState.Maximized;//полный экран
             form.FormBorderStyle = FormBorderStyle.None;//полный экран
@@ -93,7 +92,7 @@ namespace Asteroids
             Buffer = _context.Allocate(g, new Rectangle(0, 0, GetWidth(), GetHeight()));
 
             Load();
-            
+
             Timer timer = new Timer { Interval = 40 };
             timer.Tick += Timer_Tick;
             timer.Start();
@@ -106,17 +105,17 @@ namespace Asteroids
         /// Метод загрузки в память создаваемых объектов
         /// </summary>
         public static void Load()
-        {            
+        {
             int s, p;
             Random rnd = new Random();
             _stars = new Star[100];
             _background = new Background(new Point(0, 0), new Point(0, 0), new Size(0, 0));
             _asteroids = new Asteroid[16];
             _planets = new Planets[1];
-            _bullet = new Bullet(new Point(0, rnd.Next(0, Game.height)), new Point(15, 0), new Size(30, 1));
+            _bullet = new Bullet(new Point(0, rnd.Next(0, GetHeight())), new Point(15, 0), new Size(30, 1));
             _ship = new Ship(new Point(100, 400), new Point(50, 50), new Size(50, 50));
-            _aids = new Aids(new Point(0, rnd.Next(0, Game.height)), new Point(20, 0), new Size(50, 50));
-            
+            _aids = new Aids(new Point(0, rnd.Next(0, GetHeight())), new Point(20, 0), new Size(50, 50));
+
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 s = rnd.Next(30, 90);
@@ -225,11 +224,16 @@ namespace Asteroids
         /// <param name="e"></param>
         private static void Form_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space) _bullet = new Bullet(new Point(_ship.Rect.X + 45, _ship.Rect.Y + 25), new Point(5, 0), new Size(20, 1));
-            if (e.KeyCode == Keys.W) _ship.Up();
-            if (e.KeyCode == Keys.S) _ship.Down();
-            if (e.KeyCode == Keys.A) _ship.Left();
-            if (e.KeyCode == Keys.D) _ship.Right();
+            if (e.KeyCode == Keys.Space)
+                _bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 5), new Point(4, 4), new Size(20, 1));
+            if (e.KeyCode == Keys.W && _ship.Pos.Y > 20)
+                _ship.Up();
+            if (e.KeyCode == Keys.S && _ship.Pos.Y < height - 80)
+                _ship.Down();
+            if (e.KeyCode == Keys.A && _ship.Pos.X > 10)
+                _ship.Left();
+            if (e.KeyCode == Keys.D && _ship.Pos.X < width - 100)
+                _ship.Right();
         }
     }
 }

@@ -23,9 +23,8 @@ namespace Asteroids.Objects
         internal static Dictionary<int, Image> ObjTypes = new Dictionary<int, Image>();
 
         /// <summary>
-        /// статический конструктор для наполнения словаря
+        /// статический конструктор для наполнения словаря изобрадениями
         /// </summary>
-
         static Ship()
         {
             ObjTypes.Add(0, Properties.Resource1.ship2);
@@ -46,6 +45,7 @@ namespace Asteroids.Objects
         {
             this.Image = new Bitmap(ObjTypes.ElementAt(0).Value);
         }
+
         public override void Draw()
         {
 
@@ -61,27 +61,37 @@ namespace Asteroids.Objects
         {
         }
 
-        public void Attack()
-        {
 
-        }
-
+        /// <summary>
+        /// Метод движения вверх
+        /// </summary>
         public void Up()
         {
             if (Pos.Y > 0) Pos.Y = Pos.Y - Dir.Y;
         }
+
+        /// <summary>
+        /// Метод движения вниз
+        /// </summary>
         public void Down()
         {
             if (Pos.Y < Game.GetHeight()) Pos.Y = Pos.Y + Dir.Y;
         }
+
+        /// <summary>
+        /// Метод движения влево
+        /// </summary>
         public void Left()
         {
-            if (Pos.X < 0) Pos.X = Pos.X - Dir.X;
+            if (Pos.X > 0) Pos.X = Pos.X - Dir.X;
         }
 
+        /// <summary>
+        /// Метод движения вправо
+        /// </summary>
         public void Right()
         {
-            if (Pos.X > Game.GetWidth()) Pos.X = Pos.X + Dir.X;
+            if (Pos.X < Game.GetWidth()) Pos.X = Pos.X + Dir.X;
         }
 
         public void Die()
